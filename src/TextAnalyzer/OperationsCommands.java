@@ -1,22 +1,20 @@
 package TextAnalyzer;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
-
 import java.io.*;
 import java.util.Scanner;
 
 /**
  * Created by iantaman on 26.09.2015.
  */
-public class Command {
+public class OperationsCommands {
 
-    private TextAnalyzer textAnalyzer;
+    private TextAnalyzerMethods textAnalyzerMethods;
     private String string;
     private Scanner scanner;
 
 
-    public Command(TextAnalyzer textAnalyzer) {
-        this.textAnalyzer = textAnalyzer;
+    public OperationsCommands(TextAnalyzerMethods textAnalyzerMethods) {
+        this.textAnalyzerMethods = textAnalyzerMethods;
         scanner= new Scanner(System.in);
         commandChoosen();
     }
@@ -64,7 +62,7 @@ public class Command {
 
     }
 
-    private void textChosee(){
+    private void toScanningCommand(){
         System.out.println("Enter the text, please");
         string =scanner.nextLine();
         digitChose();
@@ -72,7 +70,7 @@ public class Command {
 
     private void digitChose(){
         String choice = "Choose the command (enter only number of command without any symbols: \n";
-        System.out.println(choice + CommandList.getCommandList());
+//        System.out.println(choice + CommandList.getCommandList());
 
         String digit = scanner.nextLine();
 
@@ -80,14 +78,14 @@ public class Command {
                 int i = 0;
                 i = Integer.parseInt(digit);//
 
-                switch (i){
-                    case 1: textAnalyzer.wordsNumbers(string);break;
-                    case 2: textAnalyzer.sentenceNumbers(string);break;
-                    case 3: textAnalyzer.symbolanalyz(string); break;
+                    switch (i){
+                    case 1: textAnalyzerMethods.wordsNumbers(string);break;
+                    case 2: textAnalyzerMethods.sentenceNumbers(string);break;
+                    case 3: textAnalyzerMethods.symbolanalyz(string); break;
                     case 4:
                         System.out.println("White the word which u wanna find");
                         String find =scanner.nextLine();
-                        textAnalyzer.wordFinder(string,find); break;
+                        textAnalyzerMethods.wordFinder(string,find); break;
                     case 5: System.exit(0); break; /*cycle; */
                     default: System.out.println("Error! You have to enter digit such as those above");
                 }

@@ -1,12 +1,41 @@
 package TextAnalyzer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 /**
  * Created by iantaman on 26.09.2015.
  */
-public class CommandList {
+public enum CommandList{
+    ENTER_TEXT("Enter the text"){
+
+        public void string(String string){
+            TextAnalyzerMethods.symbolanalyz(string);
+
+        }
+
+    },
+    ENTER_FILE_PATH("Enter file path"){},
+    NUMBER_OF_WORDS("Numbers of words"){},
+    NUMBER_OF_SENTENCE("Numbers of sentence"){},
+    VOWELS_AND_CONSONANTS("Numbers of vowels and consonants"){},
+    TO_FIND_THE_WORD("To find the word"){},
+    HELP("Help"){},
+    EXIT("Exit"){};
+
+    private String command;
+    private String someText;
+
+    private TextAnalyzerMethods textAnalyzerMethods = new TextAnalyzerMethods();
+
+    CommandList(String command) {
+
+       this.command = command;
+
+    }
+}
+
+
+
+
+/*public class CommandList {
     private static HashMap<Integer, String> commandMap = new HashMap<Integer, String>();
     private static String[] arrayCommand ={
             "The Number of symbols;",
@@ -32,3 +61,4 @@ public class CommandList {
     }
 
 }
+*/

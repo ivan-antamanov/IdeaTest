@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 /**
  * Created by iantaman on 24.09.2015.
  */
-public class TextAnalyzer {
+public class TextAnalyzerMethods {
 
     private static int vowels;
     private static int consonants;
@@ -18,11 +18,11 @@ public class TextAnalyzer {
     //переменные для работы с текстом
 //    private static Scanner scanner;
 
-    public TextAnalyzer() {
+    public TextAnalyzerMethods() {
 //        scanner = new Scanner(System.in);
     }  //конструктор
 
-    void symbolanalyz(String string) {
+   static void symbolanalyz(String string) {
 
             string = string.toLowerCase();
             char[] symbolArray = string.toCharArray();
@@ -50,7 +50,7 @@ public class TextAnalyzer {
             System.out.println("consonants: " + consonants);
             vowels = 0;
             consonants = 0;
-            string = null;
+
 
 
         } //гласные и согласные символы
@@ -58,7 +58,7 @@ public class TextAnalyzer {
    void wordsNumbers(String string){
             String[] str = string.split(" +");
             System.out.println("Numbers of letters: " + str.length);
-    } // количество символов
+    } // количество слов
 
    public void sentenceNumbers(String string){
        int i = 0;
