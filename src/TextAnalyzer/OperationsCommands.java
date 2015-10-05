@@ -8,21 +8,20 @@ import java.util.Scanner;
  */
 public class OperationsCommands {
 
-    private TextAnalyzerMethods textAnalyzerMethods;
+//    private TextAnalyzerMethods textAnalyzerMethods;
     private String string;
     private Scanner scanner;
 
 
     public OperationsCommands(TextAnalyzerMethods textAnalyzerMethods) {
-        this.textAnalyzerMethods = textAnalyzerMethods;
+//        this.textAnalyzerMethods = textAnalyzerMethods;
         scanner= new Scanner(System.in);
-        commandChoosen();
+//        commandChoosen();
     }
 
-    private void fileChose(){
+    private void fileChose(String filePath){
         System.out.println("Enter file path like: C:\\Users\\iantaman\\Desktop\\new 1.txt");
-        String path = scanner.nextLine();
-        File file = new File(path);
+        File file = new File(filePath);
         StringBuilder stringBuilder = new StringBuilder();
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
@@ -30,62 +29,57 @@ public class OperationsCommands {
                 stringBuilder.append(string);
                 stringBuilder.append("\n");
             }
-//            try {
-//                bufferedReader.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
+
             string =stringBuilder.toString();
             System.out.println(string);
             digitChose();
         } catch (FileNotFoundException e) {
             System.out.println("Non-correct file path");
-            fileChose();
+//            fileChose();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void commandChoosen(){
-        System.out.println("Chose the variant of scan:\n 1.Read entered text; \n 2.Read file.");
-        try {int i = Integer.valueOf(scanner.nextLine());
-            switch (i){
-                case 1: digitChose();break;
-                case 2: fileChose();break;
-                default: System.out.println("Error! You have to enter digit such as those above");
-                    break;
-            }
-        }catch (NumberFormatException e) {
-           System.out.println("Error! U have not entered digit");
-            commandChoosen();
-        }
+//    private void commandChoosen(){
+//        System.out.println("Chose the variant of scan:\n 1.Read entered text; \n 2.Read file.");
+//        try {int i = Integer.valueOf(scanner.nextLine());
+//            switch (i){
+//                case 1: digitChose();break;
+//                case 2: fileChose();break;
+//                default: System.out.println("Error! You have to enter digit such as those above");
+//                    break;
+//            }
+//        }catch (NumberFormatException e) {
+//           System.out.println("Error! U have not entered digit");
+//            commandChoosen();
+//        }
+//
+//    }
 
-    }
-
-    private void toScanningCommand(){
+    private String toScanningCommand(){
         System.out.println("Enter the text, please");
-        string =scanner.nextLine();
-        digitChose();
+        return scanner.nextLine();
     }
 
-    private void digitChose(){
+     void digitChose(){
         String choice = "Choose the command (enter only number of command without any symbols: \n";
 //        System.out.println(choice + CommandList.getCommandList());
 
-        String digit = scanner.nextLine();
+        String digit = toScanningCommand();
 
             try{
                 int i = 0;
                 i = Integer.parseInt(digit);//
 
                     switch (i){
-                    case 1: textAnalyzerMethods.wordsNumbers(string);break;
-                    case 2: textAnalyzerMethods.sentenceNumbers(string);break;
-                    case 3: textAnalyzerMethods.symbolanalyz(string); break;
-                    case 4:
-                        System.out.println("White the word which u wanna find");
-                        String find =scanner.nextLine();
-                        textAnalyzerMethods.wordFinder(string,find); break;
+//                    case 1: textAnalyzerMethods.wordsNumbers(string);break;
+//                    case 2: textAnalyzerMethods.sentenceNumbers(string);break;
+//                    case 3: textAnalyzerMethods.symbolanalyz(string); break;
+//                    case 4:
+//                        System.out.println("White the word which u wanna find");
+//                        String find =scanner.nextLine();
+//                        textAnalyzerMethods.wordFinder(string,find); break;
                     case 5: System.exit(0); break; /*cycle; */
                     default: System.out.println("Error! You have to enter digit such as those above");
                 }

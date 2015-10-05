@@ -1,28 +1,57 @@
 package TextAnalyzer;
 
+import java.io.*;
+import java.util.EnumMap;
+import java.util.Scanner;
+
 /**
  * Created by iantaman on 26.09.2015.
  */
 public enum CommandList{
     ENTER_TEXT("Enter the text"){
+        @Override
+        String toScanningCommand() {
+            return super.toScanningCommand();
+        }
+    },
+    ENTER_FILE_PATH("Enter file path"){
+        @Override
+        String toScanningCommand() {
+            super.toScanningCommand();
+            File file = new File(super.toScanningCommand());
+            StringBuilder stringBuilder = new StringBuilder();
+            try {
+                String line;
+                BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+                while ((line =bufferedReader.readLine()) !=null){
+                    stringBuilder.append(line);
+                    stringBuilder.append("\n");
+                }
 
+            } catch (FileNotFoundException e) {
+                System.out.println("Non-correct file path");
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return stringBuilder.toString();
+        }
+    },
+    NUMBER_OF_WORDS("Numbers of words"){},
+    NUMBER_OF_SENTENCE("Numbers of sentence"){},
+    VOWELS_AND_CONSONANTS("Numbers of vowels and consonants"){
         public void string(String string){
             TextAnalyzerMethods.symbolanalyz(string);
 
         }
-
     },
-    ENTER_FILE_PATH("Enter file path"){},
-    NUMBER_OF_WORDS("Numbers of words"){},
-    NUMBER_OF_SENTENCE("Numbers of sentence"){},
-    VOWELS_AND_CONSONANTS("Numbers of vowels and consonants"){},
     TO_FIND_THE_WORD("To find the word"){},
     HELP("Help"){},
     EXIT("Exit"){};
 
     private String command;
     private String someText;
-
+    private Scanner scanner = new Scanner(System.in);
     private TextAnalyzerMethods textAnalyzerMethods = new TextAnalyzerMethods();
 
     CommandList(String command) {
@@ -30,6 +59,15 @@ public enum CommandList{
        this.command = command;
 
     }
+
+    String toScanningCommand(){
+        return scanner.nextLine();
+    }
+
+
+
+
+
 }
 
 
