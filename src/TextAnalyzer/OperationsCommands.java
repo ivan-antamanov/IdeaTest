@@ -1,5 +1,8 @@
 package TextAnalyzer;
 
+import TextAnalyzer.Enum.CommandList;
+import TextAnalyzer.Enum.EnumComListMap;
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -8,19 +11,19 @@ import java.util.Scanner;
  */
 public class OperationsCommands {
 
-//    private TextAnalyzerMethods textAnalyzerMethods;
+
+    private TextAnalyzerMethods textAnalyzerMethods;
     private String string;
     private Scanner scanner;
 
 
     public OperationsCommands(TextAnalyzerMethods textAnalyzerMethods) {
-//        this.textAnalyzerMethods = textAnalyzerMethods;
+        this.textAnalyzerMethods = textAnalyzerMethods;
         scanner= new Scanner(System.in);
-//        commandChoosen();
+        scanningProcessChoosen();
     }
 
     private void fileChose(String filePath){
-        System.out.println("Enter file path like: C:\\Users\\iantaman\\Desktop\\new 1.txt");
         File file = new File(filePath);
         StringBuilder stringBuilder = new StringBuilder();
         try {
@@ -31,67 +34,65 @@ public class OperationsCommands {
             }
 
             string =stringBuilder.toString();
-            System.out.println(string);
-            digitChose();
+            System.out.print(string);
+            process(scanner.nextLine());
         } catch (FileNotFoundException e) {
-            System.out.println("Non-correct file path");
-//            fileChose();
+            print("Non-correct file path");
+            fileChose(scanner.nextLine());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-//    private void commandChoosen(){
-//        System.out.println("Chose the variant of scan:\n 1.Read entered text; \n 2.Read file.");
-//        try {int i = Integer.valueOf(scanner.nextLine());
-//            switch (i){
-//                case 1: digitChose();break;
-//                case 2: fileChose();break;
-//                default: System.out.println("Error! You have to enter digit such as those above");
-//                    break;
-//            }
-//        }catch (NumberFormatException e) {
-//           System.out.println("Error! U have not entered digit");
-//            commandChoosen();
-//        }
-//
-//    }
-
-    private String toScanningCommand(){
-        System.out.println("Enter the text, please");
-        return scanner.nextLine();
-    }
-
-     void digitChose(){
-        String choice = "Choose the command (enter only number of command without any symbols: \n";
-//        System.out.println(choice + CommandList.getCommandList());
-
-        String digit = toScanningCommand();
-
-            try{
-                int i = 0;
-                i = Integer.parseInt(digit);//
-
-                    switch (i){
-//                    case 1: textAnalyzerMethods.wordsNumbers(string);break;
-//                    case 2: textAnalyzerMethods.sentenceNumbers(string);break;
-//                    case 3: textAnalyzerMethods.symbolanalyz(string); break;
-//                    case 4:
-//                        System.out.println("White the word which u wanna find");
-//                        String find =scanner.nextLine();
-//                        textAnalyzerMethods.wordFinder(string,find); break;
-                    case 5: System.exit(0); break; /*cycle; */
-                    default: System.out.println("Error! You have to enter digit such as those above");
-                }
-            } catch (Exception e){
-                System.out.println("Error! U have not entered digit");
-//                e.printStackTrace();
+    private void scanningProcessChoosen(){
+        System.out.println(CommandList.ENTER_TEXT.getCommand()+"\n"+CommandList.ENTER_FILE_PATH.getCommand() );
+        try {String command = scanner.nextLine();
+            switch (command){
+                case "ett":
+                    print("Enter the text");
+                    toScanningCommand();
+                    print("Enter the command");
+                    process(scanner.nextLine());break;
+                case "efp":
+                    print("Enter the file path");
+                    fileChose(scanner.nextLine());break;
+                default: throw new NumberFormatException();
             }
-
-            digitChose();
+        }catch (NumberFormatException e) {
+           System.out.println("Error!");
+            scanningProcessChoosen();
         }
+
     }
 
+    private void toScanningCommand(){
+        string = scanner.nextLine();
+    }
 
+     void process(String process){
+            switch (process){
+                    case "now":
+                    case "Numbers of words":
+                        textAnalyzerMethods.numbersOfWords(string);break;
+                    case "nos": textAnalyzerMethods.numberOfSentence(string);break;
+                    case "nvc": textAnalyzerMethods.consAndWow(string); break;
+                    case "ftw":
+                        print("Write the word which u wanna find");
+                        String find =scanner.nextLine();
+                        textAnalyzerMethods.findWord(string, find); break;
+                    case "help": break;
+                    case "exit": System.exit(0); break;
+                default:
+                    print("Error! You have to enter digit such as those"+ EnumComListMap.getStringEnumMap());
+                }
+            process(scanner.nextLine());
+     }
 
-//}
+    public void help() { //going to write
+        print("Enter file path like: C:\\Users\\iantaman\\Desktop\\new 1.txt");
+    }
+
+    public void print(String string){
+         System.out.println(string);
+     }
+}

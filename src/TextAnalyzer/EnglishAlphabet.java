@@ -5,12 +5,10 @@ import java.util.ArrayList;
 /**
  * Created by iantaman on 24.09.2015.
  */
-public class Alphabet {
-    private static ArrayList<Character> letterList = new ArrayList<Character>();
+public class EnglishAlphabet {
+    private static ArrayList<Character> letterList = new ArrayList<>();
 
-    private static Alphabet alphabet = new Alphabet();
-
-    private Alphabet() {
+    static  {
             for (int i = 0; i < 26; i++) {
             int c ='a'+i;
             char a = (char)c;

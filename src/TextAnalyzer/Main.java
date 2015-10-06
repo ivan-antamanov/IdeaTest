@@ -8,7 +8,7 @@ public class Main {
 
         TextAnalyzerMethods text = new TextAnalyzerMethods();
         OperationsCommands operationsCommands = new OperationsCommands(text);
-//        System.out.println(CommandList.getCommandList());
+
 
     }
 }
