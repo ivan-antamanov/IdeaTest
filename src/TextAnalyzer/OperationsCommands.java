@@ -32,7 +32,6 @@ public class OperationsCommands {
                 stringBuilder.append(string);
                 stringBuilder.append("\n");
             }
-
             string =stringBuilder.toString();
             System.out.print(string);
             process(scanner.nextLine());
@@ -45,23 +44,57 @@ public class OperationsCommands {
     }
 
     private void scanningProcessChoosen(){
-        System.out.println(CommandList.ENTER_TEXT.getCommand()+"\n"+CommandList.ENTER_FILE_PATH.getCommand() );
-        try {String command = scanner.nextLine();
-            switch (command){
-                case "ett":
+        print("Analyze entered text or text-file (help)");
+        try {
+            switch (EnumComListMap.getStringEnumMap().get(scanner.nextLine())){
+                case ENTER_TEXT:
                     print("Enter the text");
                     toScanningCommand();
                     print("Enter the command");
                     process(scanner.nextLine());break;
-                case "efp":
+                case ENTER_FILE_PATH:
                     print("Enter the file path");
                     fileChose(scanner.nextLine());break;
+                case HELP:
+                    help();break;
                 default: throw new NumberFormatException();
             }
-        }catch (NumberFormatException e) {
-           System.out.println("Error!");
+        }catch (Exception e)
+        {
+            System.out.println("Error!");
             scanningProcessChoosen();
         }
+        scanningProcessChoosen();
+    }
+
+    void process(String command){
+        if (EnumComListMap.getStringEnumMap().containsKey(command)) {
+            switch (EnumComListMap.getStringEnumMap().get(command)) {
+                case NUMBER_OF_WORDS:
+                    textAnalyzerMethods.numbersOfWords(string);
+                    break;
+                case NUMBER_OF_SENTENCE:
+                    textAnalyzerMethods.numberOfSentence(string);
+                    break;
+                case VOWELS_AND_CONSONANTS:
+                    textAnalyzerMethods.consAndWow(string);
+                    break;
+                case TO_FIND_THE_WORD:
+                    print("Write the word which u wanna find");
+                    String find = scanner.nextLine();
+                    textAnalyzerMethods.findWord(string, find);
+                    break;
+                case HELP:
+                    help();
+                    break;
+                case EXIT:
+                    System.exit(0);
+                    break;
+                default:
+                    print("Error! You have to enter digit such as those" + EnumComListMap.getStringEnumMap());
+            }
+        }
+        process(scanner.nextLine());
 
     }
 
@@ -69,27 +102,9 @@ public class OperationsCommands {
         string = scanner.nextLine();
     }
 
-     void process(String process){
-            switch (process){
-                    case "now":
-                    case "Numbers of words":
-                        textAnalyzerMethods.numbersOfWords(string);break;
-                    case "nos": textAnalyzerMethods.numberOfSentence(string);break;
-                    case "nvc": textAnalyzerMethods.consAndWow(string); break;
-                    case "ftw":
-                        print("Write the word which u wanna find");
-                        String find =scanner.nextLine();
-                        textAnalyzerMethods.findWord(string, find); break;
-                    case "help": break;
-                    case "exit": System.exit(0); break;
-                default:
-                    print("Error! You have to enter digit such as those"+ EnumComListMap.getStringEnumMap());
-                }
-            process(scanner.nextLine());
-     }
-
     public void help() { //going to write
-        print("Enter file path like: C:\\Users\\iantaman\\Desktop\\new 1.txt");
+        for (CommandList command: CommandList.values() )
+            System.out.println(command.toString());
     }
 
     public void print(String string){
