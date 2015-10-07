@@ -22,7 +22,7 @@ public class ScanTest {
 //                System.out.println(str.length());
 
 
-                analyzer.sentenceNumbers("Regular expression processors are found in several search engines, search and replace dialogs of several \n" +
+                analyzer.numberOfSentence("Regular expression processors are found in several search engines, search and replace dialogs of several \n" +
                         "word processors and text editors, and in the command lines of text processing utilities, such as sed and AWK.");
 
 

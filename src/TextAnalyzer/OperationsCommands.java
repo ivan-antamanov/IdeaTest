@@ -4,6 +4,9 @@ import TextAnalyzer.Enum.CommandList;
 import TextAnalyzer.Enum.EnumComListMap;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 /**
@@ -24,14 +27,16 @@ public class OperationsCommands {
     }
 
     private void fileChose(String filePath){
-        File file = new File(filePath);
+        Path file = Paths.get("C:\\Users\\iantaman\\Desktop\\new 1.txt");
+//        Path file = Paths.get(filePath);
         StringBuilder stringBuilder = new StringBuilder();
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            BufferedReader bufferedReader = Files.newBufferedReader(file);
             while ((string =bufferedReader.readLine()) !=null){
                 stringBuilder.append(string);
                 stringBuilder.append("\n");
             }
+            bufferedReader.close();
             string =stringBuilder.toString();
             System.out.print(string);
             process(scanner.nextLine());
@@ -39,6 +44,9 @@ public class OperationsCommands {
             print("Non-correct file path");
             fileChose(scanner.nextLine());
         } catch (IOException e) {
+            System.out.println("IOException");
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
