@@ -58,7 +58,6 @@ public class TextAnalyzerMethods {
 
         while (matcher.find()) {
             i++;
-            System.out.println(matcher.group());
         }
         System.out.println("There are: " + i + " Sentence(s)");
 
