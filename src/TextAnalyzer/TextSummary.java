@@ -20,4 +20,10 @@ public class TextSummary {
     public Integer getVowels() {
         return vowels;
     }
+
+    @Override
+    public String toString() {
+        return "numbers of consonants:"+consonants+"\n"+
+               "numbers of vowels:"+vowels;
+    }
 }

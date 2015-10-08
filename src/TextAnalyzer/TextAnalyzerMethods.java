@@ -37,20 +37,23 @@ public class TextAnalyzerMethods {
                 }
             }
             textSummary = new TextSummary(vowels,consonants);
-            System.out.println("vowels: " + vowels);
-            System.out.println("consonants: " + consonants);
-            System.out.println(textSummary.getConsonants());
+            System.out.println(textSummary);
 
         } //count numbers of consonant and vowels
 
    public static void numbersOfWords(String string){
-            String[] str = string.split(" +");
-            System.out.println("Numbers of words: " + str.length);
+       int i=0;
+       pattern = Pattern.compile("[a-zA-Z0-9]*(?=[,\\s\\.()\";:!?/\\-\\|])");
+       matcher = pattern.matcher(string);
+       while( matcher.find()){
+           i++;
+       }
+       System.out.println(i);
     }
 
    public static void numberOfSentence(String string){
        int i = 0;
-       pattern = Pattern.compile("(\\s)*([A-Z]){1}[^.]*[.]");
+       pattern = Pattern.compile("(?:([.!?][\\s]*[A-Z])|([.!?][\\s]*$))");
        matcher = pattern.matcher(string);
 
        while(matcher.find()){
@@ -78,7 +81,6 @@ public class TextAnalyzerMethods {
 
         while( matcher.find()){
            i++;
-            System.out.println(matcher.group());
         }
         System.out.println(i);
     }

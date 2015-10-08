@@ -10,8 +10,8 @@ import java.util.Scanner;
  * Created by iantaman on 26.09.2015.
  */
 public enum CommandList{
-    ENTER_TEXT("ett","Enter the text"){},
-    ENTER_FILE_PATH("efp","Enter file path"){},
+    ENTER_TEXT("ett","Enter the text and analyze it"){},
+    ENTER_FILE_PATH("efp","Enter text-file path and analyze it"){},
     NUMBER_OF_WORDS("now","Numbers of words"){},
     NUMBER_OF_SENTENCE("nos","Numbers of sentence"){},
     VOWELS_AND_CONSONANTS("nvc","Numbers of vowels and consonants"){},
@@ -41,5 +41,16 @@ public enum CommandList{
 
     public String getShortCommand() {
         return shortCommand;
+    }
+
+
+    @Override
+    public String toString() {
+        if (shortCommand != null) {
+            return shortCommand + "(command)" + "=" + command;
+        } else {
+            return command.toLowerCase() + "(command)" + "=" + command;
+
+        }
     }
 }

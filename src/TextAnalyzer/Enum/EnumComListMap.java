@@ -26,9 +26,4 @@ public class EnumComListMap {
     public static HashMap<String, CommandList> getStringEnumMap() {
         return stringEnumMap;
     }
-
-    public static void main(String[] args) {
-        System.out.println(EnumComListMap.stringEnumMap);
-    }
-
 }

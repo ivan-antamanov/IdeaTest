@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
         TextAnalyzerMethods text = new TextAnalyzerMethods();
-        OperationsCommands operationsCommands = new OperationsCommands(text);
+        ConsoleCommands consoleCommands = new ConsoleCommands(text);
 
 
     }

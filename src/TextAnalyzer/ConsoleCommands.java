@@ -12,7 +12,7 @@ import java.util.Scanner;
 /**
  * Created by iantaman on 26.09.2015.
  */
-public class OperationsCommands {
+public class ConsoleCommands {
 
 
     private TextAnalyzerMethods textAnalyzerMethods;
@@ -20,7 +20,7 @@ public class OperationsCommands {
     private Scanner scanner;
 
 
-    public OperationsCommands(TextAnalyzerMethods textAnalyzerMethods) {
+    public ConsoleCommands(TextAnalyzerMethods textAnalyzerMethods) {
         this.textAnalyzerMethods = textAnalyzerMethods;
         scanner= new Scanner(System.in);
         scanningProcessChoosen();
