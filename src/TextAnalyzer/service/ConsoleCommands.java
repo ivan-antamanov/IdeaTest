@@ -1,9 +1,11 @@
-package TextAnalyzer;
+package TextAnalyzer.service;
 
-import TextAnalyzer.Enum.CommandList;
-import TextAnalyzer.Enum.EnumComListMap;
+import TextAnalyzer.utility.CommandList;
+import TextAnalyzer.utility.Text;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,53 +16,27 @@ import java.util.Scanner;
  */
 public class ConsoleCommands {
 
-
-    private TextAnalyzerMethods textAnalyzerMethods;
-    private String string;
+    private Text userInput;
     private Scanner scanner;
 
 
-    public ConsoleCommands(TextAnalyzerMethods textAnalyzerMethods) {
-        this.textAnalyzerMethods = textAnalyzerMethods;
+    public ConsoleCommands() {
         scanner = new Scanner(System.in);
+        userInput = new Text();
         scanningProcessChoosen();
-    }
-
-    private void fileChose(String filePath) {
-        Path file = Paths.get(filePath);
-        StringBuilder stringBuilder = new StringBuilder();
-        try {
-            BufferedReader bufferedReader = Files.newBufferedReader(file);
-            while ((string = bufferedReader.readLine()) != null) {
-                stringBuilder.append(string);
-                stringBuilder.append("\n");
-            }
-            bufferedReader.close();
-            string = stringBuilder.toString();
-            System.out.print(string);
-            print("Enter command:");
-            process(scanner.nextLine());
-        } catch (FileNotFoundException e) {
-            print("Non-correct file path");
-        } catch (IOException e) {
-            System.out.println("IOException");
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     private void scanningProcessChoosen() {
         print("Enter the command for analyze text or text-file. (help)");
         try {
-            switch (EnumComListMap.getStringEnumMap().get(scanner.nextLine())) {
-                case ENTER_TEXT:
+            switch (CommandList.getStringEnumMap().get(scanner.nextLine())) {
+                case TEXT_MODEL:
                     print("Enter the text");
                     toScanningCommand();
                     print("Enter the command");
                     process(scanner.nextLine());
                     break;
-                case ENTER_FILE_PATH:
+                case FILE_MODEL:
                     print("Enter the file path");
                     fileChose(scanner.nextLine());
                     break;
@@ -74,25 +50,52 @@ public class ConsoleCommands {
             System.out.println("Error!");
             scanningProcessChoosen();
         }
+        scanningProcessChoosen();
+    }
+
+    private void fileChose(String filePath) {
+        Path file = Paths.get(filePath);
+        StringBuilder stringBuilder = new StringBuilder();
+        try {
+            BufferedReader bufferedReader = Files.newBufferedReader(file);
+            while (bufferedReader.readLine() != null) {
+                stringBuilder.append(bufferedReader.readLine());
+                stringBuilder.append("\n");
+            }
+            bufferedReader.close();
+            userInput.setInputText(stringBuilder.toString());
+            System.out.print(userInput);
+            print("Successful scan");
+            print("Enter the command");
+            process(scanner.nextLine());
+        } catch (FileNotFoundException e) {
+            print("Non-correct file path");
+            fileChose(scanner.nextLine());
+        } catch (IOException e) {
+            System.out.println("IOException");
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     void process(String command) {
         print("Enter command:");
-        if (EnumComListMap.getStringEnumMap().containsKey(command)) {
-            switch (EnumComListMap.getStringEnumMap().get(command)) {
+        if (CommandList.getStringEnumMap().containsKey(command)) {
+            switch (CommandList.getStringEnumMap().get(command)) {
                 case NUMBER_OF_WORDS:
-                    textAnalyzerMethods.numbersOfWords(string);
+                    TextAnalyzerUtils.numbersOfWords(userInput.getInputText());
                     break;
                 case NUMBER_OF_SENTENCE:
-                    textAnalyzerMethods.numberOfSentence(string);
+                    TextAnalyzerUtils.numberOfSentence(userInput.getInputText());
                     break;
                 case VOWELS_AND_CONSONANTS:
-                    textAnalyzerMethods.consAndWow(string);
+                    TextAnalyzerUtils.consAndWow(userInput.getInputText());
                     break;
                 case TO_FIND_THE_WORD:
                     print("Write the word which u wanna find");
                     String find = scanner.nextLine();
-                    textAnalyzerMethods.findWord(string, find);
+                    TextAnalyzerUtils.findWord(userInput.getInputText(), find);
                     break;
                 case HELP:
                     help();
@@ -101,7 +104,7 @@ public class ConsoleCommands {
                     System.exit(0);
                     break;
                 default:
-                    print("Error! You have to enter digit such as those" + EnumComListMap.getStringEnumMap());
+                    print("Error! You have to enter digit such as those" + CommandList.getStringEnumMap());
             }
         }
         process(scanner.nextLine());
@@ -109,7 +112,7 @@ public class ConsoleCommands {
     }
 
     private void toScanningCommand() {
-        string = scanner.nextLine();
+        userInput.setInputText(scanner.nextLine());
     }
 
     public void help() {
