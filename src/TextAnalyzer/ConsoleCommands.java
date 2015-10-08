@@ -22,22 +22,22 @@ public class ConsoleCommands {
 
     public ConsoleCommands(TextAnalyzerMethods textAnalyzerMethods) {
         this.textAnalyzerMethods = textAnalyzerMethods;
-        scanner= new Scanner(System.in);
+        scanner = new Scanner(System.in);
         scanningProcessChoosen();
     }
 
-    private void fileChose(String filePath){
+    private void fileChose(String filePath) {
         Path file = Paths.get("C:\\Users\\iantaman\\Desktop\\new 1.txt");
 //        Path file = Paths.get(filePath);
         StringBuilder stringBuilder = new StringBuilder();
         try {
             BufferedReader bufferedReader = Files.newBufferedReader(file);
-            while ((string =bufferedReader.readLine()) !=null){
+            while ((string = bufferedReader.readLine()) != null) {
                 stringBuilder.append(string);
                 stringBuilder.append("\n");
             }
             bufferedReader.close();
-            string =stringBuilder.toString();
+            string = stringBuilder.toString();
             System.out.print(string);
             process(scanner.nextLine());
         } catch (FileNotFoundException e) {
@@ -51,31 +51,34 @@ public class ConsoleCommands {
         }
     }
 
-    private void scanningProcessChoosen(){
+    private void scanningProcessChoosen() {
         print("Analyze entered text or text-file (help)");
         try {
-            switch (EnumComListMap.getStringEnumMap().get(scanner.nextLine())){
+            switch (EnumComListMap.getStringEnumMap().get(scanner.nextLine())) {
                 case ENTER_TEXT:
                     print("Enter the text");
                     toScanningCommand();
                     print("Enter the command");
-                    process(scanner.nextLine());break;
+                    process(scanner.nextLine());
+                    break;
                 case ENTER_FILE_PATH:
                     print("Enter the file path");
-                    fileChose(scanner.nextLine());break;
+                    fileChose(scanner.nextLine());
+                    break;
                 case HELP:
-                    help();break;
-                default: throw new NumberFormatException();
+                    help();
+                    break;
+                default:
+                    throw new NumberFormatException();
             }
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Error!");
             scanningProcessChoosen();
         }
         scanningProcessChoosen();
     }
 
-    void process(String command){
+    void process(String command) {
         if (EnumComListMap.getStringEnumMap().containsKey(command)) {
             switch (EnumComListMap.getStringEnumMap().get(command)) {
                 case NUMBER_OF_WORDS:
@@ -106,16 +109,16 @@ public class ConsoleCommands {
 
     }
 
-    private void toScanningCommand(){
+    private void toScanningCommand() {
         string = scanner.nextLine();
     }
 
     public void help() { //going to write
-        for (CommandList command: CommandList.values() )
+        for (CommandList command : CommandList.values())
             System.out.println(command.toString());
     }
 
-    public void print(String string){
-         System.out.println(string);
-     }
+    public void print(String string) {
+        System.out.println(string);
+    }
 }

@@ -8,10 +8,10 @@ import java.util.ArrayList;
 public class EnglishAlphabet {
     private static ArrayList<Character> letterList = new ArrayList<>();
 
-    static  {
-            for (int i = 0; i < 26; i++) {
-            int c ='a'+i;
-            char a = (char)c;
+    static {
+        for (int i = 0; i < 26; i++) {
+            int c = 'a' + i;
+            char a = (char) c;
             Character character = new Character(a);
             letterList.add(character);
         }

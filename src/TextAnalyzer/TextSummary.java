@@ -23,7 +23,7 @@ public class TextSummary {
 
     @Override
     public String toString() {
-        return "numbers of consonants:"+consonants+"\n"+
-               "numbers of vowels:"+vowels;
+        return "numbers of consonants:" + consonants + "\n" +
+                "numbers of vowels:" + vowels;
     }
 }

@@ -9,15 +9,15 @@ import java.util.Scanner;
 /**
  * Created by iantaman on 26.09.2015.
  */
-public enum CommandList{
-    ENTER_TEXT("ett","Enter the text and analyze it"){},
-    ENTER_FILE_PATH("efp","Enter text-file path and analyze it"){},
-    NUMBER_OF_WORDS("now","Numbers of words"){},
-    NUMBER_OF_SENTENCE("nos","Numbers of sentence"){},
-    VOWELS_AND_CONSONANTS("nvc","Numbers of vowels and consonants"){},
-    TO_FIND_THE_WORD("ftw","To find the word"){},
-    HELP("Help"){},
-    EXIT("Exit"){};
+public enum CommandList {
+    ENTER_TEXT("ett", "Enter the text and analyze it") {},
+    ENTER_FILE_PATH("efp", "Enter text-file path and analyze it") {},
+    NUMBER_OF_WORDS("now", "Numbers of words") {},
+    NUMBER_OF_SENTENCE("nos", "Numbers of sentence") {},
+    VOWELS_AND_CONSONANTS("nvc", "Numbers of vowels and consonants") {},
+    TO_FIND_THE_WORD("ftw", "To find the word") {},
+    HELP("Help") {},
+    EXIT("Exit") {};
 
     private String command;
     private String shortCommand;

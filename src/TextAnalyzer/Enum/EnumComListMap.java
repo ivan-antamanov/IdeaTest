@@ -11,17 +11,17 @@ import java.util.Map;
  */
 public class EnumComListMap {
 
-     private static HashMap<String,CommandList> stringEnumMap = new HashMap<String, CommandList>();
+    private static HashMap<String, CommandList> stringEnumMap = new HashMap<String, CommandList>();
 
-     static {
-         for (CommandList e : CommandList.values()) {
-             if (e.getShortCommand() != null) {
-                 stringEnumMap.put(e.getShortCommand(), e);
-             } else {
-                 stringEnumMap.put(e.getCommand().toLowerCase(), e);
-             }
-         }
-     }
+    static {
+        for (CommandList e : CommandList.values()) {
+            if (e.getShortCommand() != null) {
+                stringEnumMap.put(e.getShortCommand(), e);
+            } else {
+                stringEnumMap.put(e.getCommand().toLowerCase(), e);
+            }
+        }
+    }
 
     public static HashMap<String, CommandList> getStringEnumMap() {
         return stringEnumMap;
