@@ -11,7 +11,7 @@ import java.util.Scanner;
  */
 public enum CommandList {
     ENTER_TEXT("ett", "Enter the text and analyze it") {},
-    ENTER_FILE_PATH("efp", "Enter text-file path and analyze it") {},
+    ENTER_FILE_PATH("efp", "Enter text-file path like \"C:\\\\Users\\\\iantaman\\\\Desktop\\\\new 1.txt\" and analyze it") {},
     NUMBER_OF_WORDS("now", "Numbers of words") {},
     NUMBER_OF_SENTENCE("nos", "Numbers of sentence") {},
     VOWELS_AND_CONSONANTS("nvc", "Numbers of vowels and consonants") {},

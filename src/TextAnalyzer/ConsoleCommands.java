@@ -27,8 +27,7 @@ public class ConsoleCommands {
     }
 
     private void fileChose(String filePath) {
-        Path file = Paths.get("C:\\Users\\iantaman\\Desktop\\new 1.txt");
-//        Path file = Paths.get(filePath);
+        Path file = Paths.get(filePath);
         StringBuilder stringBuilder = new StringBuilder();
         try {
             BufferedReader bufferedReader = Files.newBufferedReader(file);
@@ -39,10 +38,10 @@ public class ConsoleCommands {
             bufferedReader.close();
             string = stringBuilder.toString();
             System.out.print(string);
+            print("Enter command:");
             process(scanner.nextLine());
         } catch (FileNotFoundException e) {
             print("Non-correct file path");
-            fileChose(scanner.nextLine());
         } catch (IOException e) {
             System.out.println("IOException");
             e.printStackTrace();
@@ -52,7 +51,7 @@ public class ConsoleCommands {
     }
 
     private void scanningProcessChoosen() {
-        print("Analyze entered text or text-file (help)");
+        print("Enter the command for analyze text or text-file. (help)");
         try {
             switch (EnumComListMap.getStringEnumMap().get(scanner.nextLine())) {
                 case ENTER_TEXT:
@@ -75,10 +74,10 @@ public class ConsoleCommands {
             System.out.println("Error!");
             scanningProcessChoosen();
         }
-        scanningProcessChoosen();
     }
 
     void process(String command) {
+        print("Enter command:");
         if (EnumComListMap.getStringEnumMap().containsKey(command)) {
             switch (EnumComListMap.getStringEnumMap().get(command)) {
                 case NUMBER_OF_WORDS:
@@ -113,7 +112,11 @@ public class ConsoleCommands {
         string = scanner.nextLine();
     }
 
-    public void help() { //going to write
+    public void help() {
+        print("This is \"text analyzer\" which can analyzing the text.\n" +
+                "At first u have to choose how r u going to analyze text: from file or has entered in console.\n" +
+                "After that u can choose methods to analyze\n" +
+                "When the analyze has finished u may exit from applications");
         for (CommandList command : CommandList.values())
             System.out.println(command.toString());
     }
