@@ -16,13 +16,13 @@ import java.util.Scanner;
  */
 public class ConsoleCommands {
 
-    private Text userInput;
+    private Text userInputText;
     private Scanner scanner;
 
 
     public ConsoleCommands() {
         scanner = new Scanner(System.in);
-        userInput = new Text();
+        userInputText = new Text();
         scanningProcessChoosen();
     }
 
@@ -32,7 +32,7 @@ public class ConsoleCommands {
             switch (CommandList.getStringEnumMap().get(scanner.nextLine())) {
                 case TEXT_MODEL:
                     print("Enter the text");
-                    toScanningCommand();
+                    readUserInputText();
                     print("Enter the command");
                     process(scanner.nextLine());
                     break;
@@ -44,7 +44,7 @@ public class ConsoleCommands {
                     help();
                     break;
                 default:
-                    throw new NumberFormatException();
+                    print("Unsupported command! You have to enter digit such as those" + CommandList.getStringEnumMap());
             }
         } catch (Exception e) {
             System.out.println("Error!");
@@ -63,8 +63,8 @@ public class ConsoleCommands {
                 stringBuilder.append("\n");
             }
             bufferedReader.close();
-            userInput.setInputText(stringBuilder.toString());
-            System.out.print(userInput);
+            userInputText.setInputText(stringBuilder.toString());
+            System.out.print(userInputText);
             print("Successful scan");
             print("Enter the command");
             process(scanner.nextLine());
@@ -72,10 +72,10 @@ public class ConsoleCommands {
             print("Non-correct file path");
             fileChose(scanner.nextLine());
         } catch (IOException e) {
-            System.out.println("IOException");
-            e.printStackTrace();
+            print("Can't scanning file! Please check file settings");
+            fileChose(scanner.nextLine());
         } catch (Exception e) {
-            e.printStackTrace();
+            print("Something going wrong. Please try again");
         }
     }
 
@@ -84,18 +84,18 @@ public class ConsoleCommands {
         if (CommandList.getStringEnumMap().containsKey(command)) {
             switch (CommandList.getStringEnumMap().get(command)) {
                 case NUMBER_OF_WORDS:
-                    TextAnalyzerUtils.numbersOfWords(userInput.getInputText());
+                    TextAnalyzerUtils.numbersOfWords(userInputText.getInputText());
                     break;
                 case NUMBER_OF_SENTENCE:
-                    TextAnalyzerUtils.numberOfSentence(userInput.getInputText());
+                    TextAnalyzerUtils.numberOfSentence(userInputText.getInputText());
                     break;
                 case VOWELS_AND_CONSONANTS:
-                    TextAnalyzerUtils.consAndWow(userInput.getInputText());
+                    TextAnalyzerUtils.consAndWow(userInputText.getInputText());
                     break;
                 case TO_FIND_THE_WORD:
                     print("Write the word which u wanna find");
                     String find = scanner.nextLine();
-                    TextAnalyzerUtils.findWord(userInput.getInputText(), find);
+                    TextAnalyzerUtils.findWord(userInputText.getInputText(), find);
                     break;
                 case HELP:
                     help();
@@ -104,15 +104,15 @@ public class ConsoleCommands {
                     System.exit(0);
                     break;
                 default:
-                    print("Error! You have to enter digit such as those" + CommandList.getStringEnumMap());
+                    print("Unsupported command! You have to enter digit such as those" + CommandList.getStringEnumMap());
             }
         }
         process(scanner.nextLine());
 
     }
 
-    private void toScanningCommand() {
-        userInput.setInputText(scanner.nextLine());
+    private void readUserInputText() {
+        userInputText.setInputText(scanner.nextLine());
     }
 
     public void help() {
