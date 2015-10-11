@@ -56,8 +56,8 @@ public class ConsoleCommands {
     private void fileChose(String filePath) {
         Path file = Paths.get(filePath);
         StringBuilder stringBuilder = new StringBuilder();
-        try {
-            BufferedReader bufferedReader = Files.newBufferedReader(file);
+        try(BufferedReader bufferedReader = Files.newBufferedReader(file)) {
+
             while (bufferedReader.readLine() != null) {
                 stringBuilder.append(bufferedReader.readLine());
                 stringBuilder.append("\n");

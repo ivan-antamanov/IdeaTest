@@ -1,4 +1,4 @@
-package Test.EnumTest;
+package Testing.Test.EnumTest;
 
 /**
  * Created by iantaman on 05.10.2015.

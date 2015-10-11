@@ -1,4 +1,4 @@
-package Test;
+package Testing.Test;
 
 /**
  * Created by iantaman on 01.10.2015.

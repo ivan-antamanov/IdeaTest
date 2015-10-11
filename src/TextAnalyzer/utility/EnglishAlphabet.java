@@ -1,4 +1,4 @@
-package TextAnalyzer;
+package TextAnalyzer.utility;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by iantaman on 24.09.2015.
  */
 public class EnglishAlphabet {
-    private static ArrayList<Character> letterList = new ArrayList<>();
+    private static ArrayList<Character> letterList = new ArrayList<>(26);
 
     static {
         for (int i = 0; i < 26; i++) {
@@ -20,6 +20,5 @@ public class EnglishAlphabet {
     public static ArrayList<Character> getLetterList() {
         return letterList;
     }
-
 
 }

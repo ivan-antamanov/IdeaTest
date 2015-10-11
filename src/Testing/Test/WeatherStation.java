@@ -1,4 +1,4 @@
-package Test;
+package Testing.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,6 +96,6 @@ class CurrentConditionsDisplay implements Observer
 
     public void display()
     {
-        System.out.printf("Сейчас значения: %.1f градусов цельсия и %.1f %% влажности\n", temperature, humidity);
+        System.out.printf("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: %.1f пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ %.1f %% пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ\n", temperature, humidity);
     }
 }

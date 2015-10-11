@@ -1,4 +1,7 @@
-package TextAnalyzer;
+package TextAnalyzer.service;
+
+import TextAnalyzer.utility.EnglishAlphabet;
+import TextAnalyzer.utility.TextSummary;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -6,8 +9,7 @@ import java.util.regex.Pattern;
 /**
  * Created by iantaman on 24.09.2015.
  */
-public class TextAnalyzerMethods {
-    private static TextSummary textSummary;
+public class TextAnalyzerUtils {
     private static Pattern pattern;
     private static Matcher matcher;
 
@@ -36,8 +38,7 @@ public class TextAnalyzerMethods {
                 }
             }
         }
-        textSummary = new TextSummary(vowels, consonants);
-        System.out.println(textSummary);
+        System.out.println(new TextSummary(vowels, consonants));
 
     } //count numbers of consonant and vowels
 
@@ -48,7 +49,7 @@ public class TextAnalyzerMethods {
         while (matcher.find()) {
             i++;
         }
-        System.out.println(i);
+        System.out.print(i);
     }
 
     public static void numberOfSentence(String string) {

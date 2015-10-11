@@ -1,4 +1,4 @@
-import TextAnalyzer.TextAnalyzerMethods;
+import TextAnalyzer.service.TextAnalyzerUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,7 +12,7 @@ public class ScanTest {
 
     public static void main(String[] args) {
         String str;
-        TextAnalyzerMethods analyzer = new TextAnalyzerMethods();
+        TextAnalyzerUtils analyzer = new TextAnalyzerUtils();
         try {
             Scanner in = new Scanner(new File("C:\\Users\\iantaman\\Desktop\\new 1.txt"));
             System.out.println("Successful file scan");
