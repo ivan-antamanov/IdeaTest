@@ -56,13 +56,13 @@ public class ConsoleCommands {
     private void fileChose(String filePath) {
         Path file = Paths.get(filePath);
         StringBuilder stringBuilder = new StringBuilder();
-        try(BufferedReader bufferedReader = Files.newBufferedReader(file)) {
-
-            while (bufferedReader.readLine() != null) {
-                stringBuilder.append(bufferedReader.readLine());
+        try (BufferedReader bufferedReader = Files.newBufferedReader(file)) {
+            String nextLine;
+            while ((nextLine = bufferedReader.readLine()) != null) {
+                stringBuilder.append(nextLine);
                 stringBuilder.append("\n");
             }
-            bufferedReader.close();
+
             userInputText.setInputText(stringBuilder.toString());
             System.out.print(userInputText);
             print("Successful scan");
@@ -80,7 +80,7 @@ public class ConsoleCommands {
     }
 
     void process(String command) {
-        print("Enter command:");
+
         if (CommandList.getStringEnumMap().containsKey(command)) {
             switch (CommandList.getStringEnumMap().get(command)) {
                 case NUMBER_OF_WORDS:
@@ -101,12 +101,17 @@ public class ConsoleCommands {
                     help();
                     break;
                 case EXIT:
+                    print("Bye");
                     System.exit(0);
                     break;
                 default:
-                    print("Unsupported command! You have to enter digit such as those" + CommandList.getStringEnumMap());
+                    print("Unsupported command! You have to enter digit such as those");
+                    for (CommandList commandList : CommandList.values()) {
+                        System.out.println(commandList.toString());
+                    }
             }
         }
+        print("Enter the command");
         process(scanner.nextLine());
 
     }
@@ -119,7 +124,8 @@ public class ConsoleCommands {
         print("This is \"text analyzer\" which can analyzing the text.\n" +
                 "At first u have to choose how r u going to analyze text: from file or has entered in console.\n" +
                 "After that u can choose methods to analyze\n" +
-                "When the analyze has finished u may exit from applications");
+                "When the analyze has finished u may exit from applications\n" +
+                "If u already had choose variable of text, please, don't enter this command: ett, efp");
         for (CommandList command : CommandList.values())
             System.out.println(command.toString());
     }
@@ -127,4 +133,5 @@ public class ConsoleCommands {
     public void print(String string) {
         System.out.println(string);
     }
+
 }
