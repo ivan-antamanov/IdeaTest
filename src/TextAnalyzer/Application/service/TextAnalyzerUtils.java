@@ -1,7 +1,7 @@
-package TextAnalyzer.service;
+package TextAnalyzer.Application.service;
 
-import TextAnalyzer.utility.EnglishAlphabet;
-import TextAnalyzer.utility.TextSummary;
+import TextAnalyzer.Application.utility.EnglishAlphabet;
+import TextAnalyzer.Application.utility.TextSummary;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,12 +13,12 @@ public class TextAnalyzerUtils {
     private static Pattern pattern;
     private static Matcher matcher;
 
-    public static void consAndWow(String string) {
+    public static void consAndWow(String inputText) {
         int vowels = 0;
         int consonants = 0;
 
-        string = string.toLowerCase();
-        char[] symbolArray = string.toCharArray();
+        inputText = inputText.toLowerCase();
+        char[] symbolArray = inputText.toCharArray();
 
         for (Character c : symbolArray) {
             if (EnglishAlphabet.getLetterList().contains(c)) {
@@ -42,20 +42,30 @@ public class TextAnalyzerUtils {
 
     } //count numbers of consonant and vowels
 
-    public static void numbersOfWords(String string) {
+    public static void numbersOfWords(String inputText) {
         int i = 0;
         pattern = Pattern.compile("[a-zA-Z0-9]+(?=[,\\s\\.()\";:!?\\/\\-]*)");
-        matcher = pattern.matcher(string);
+        matcher = pattern.matcher(inputText);
         while (matcher.find()) {
             i++;
         }
-        System.out.println("There are: "+ i + " words");
+        System.out.println("There are: " + i + " words");
     }
 
-    public static void numberOfSentence(String string) {
+    public static void numberOfSymbols(String inputText) {
+        int i = 0;
+        pattern = Pattern.compile("[.]*");
+        matcher = pattern.matcher(inputText);
+        while (matcher.find()) {
+            i++;
+        }
+        System.out.println("There are: " + i + " symbols");
+    }
+
+    public static void numberOfSentence(String inputText) {
         int i = 0;
         pattern = Pattern.compile("(?:([.!?][\\s]*[A-Z])|([.!?][\\s]*$))");
-        matcher = pattern.matcher(string);
+        matcher = pattern.matcher(inputText);
 
         while (matcher.find()) {
             i++;
@@ -64,10 +74,10 @@ public class TextAnalyzerUtils {
 
     }
 
-    public static void findWord(String string, String find) {
+    public static void findWord(String inputText, String searchWord) {
         int i = 0;
-        pattern = Pattern.compile(find);
-        matcher = pattern.matcher(string);
+        pattern = Pattern.compile(searchWord);
+        matcher = pattern.matcher(inputText);
 
         while (matcher.find()) {
             i++;

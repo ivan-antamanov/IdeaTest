@@ -1,4 +1,4 @@
-package TextAnalyzer.utility;
+package TextAnalyzer.Application.utility;
 
 import java.util.ArrayList;
 

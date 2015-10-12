@@ -1,7 +1,7 @@
-package TextAnalyzer;
+package TextAnalyzer.Application;
 
-import TextAnalyzer.service.ConsoleCommands;
-import TextAnalyzer.service.TextAnalyzerUtils;
+import TextAnalyzer.Application.service.ConsoleCommands;
+import TextAnalyzer.Application.service.TextAnalyzerUtils;
 
 /**
  * Created by iantaman on 24.09.2015.
@@ -11,6 +11,7 @@ public class Main {
 
         TextAnalyzerUtils text = new TextAnalyzerUtils();
         ConsoleCommands consoleCommands = new ConsoleCommands();
+
 
 
     }

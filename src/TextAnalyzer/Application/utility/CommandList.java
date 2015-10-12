@@ -1,4 +1,4 @@
-package TextAnalyzer.utility;
+package TextAnalyzer.Application.utility;
 
 import java.util.HashMap;
 
@@ -12,6 +12,7 @@ public enum CommandList {
     NUMBER_OF_SENTENCE("nos", "Numbers of sentence"),
     VOWELS_AND_CONSONANTS("nvc", "Numbers of vowels and consonants"),
     TO_FIND_THE_WORD("ftw", "To find the word"),
+    NUMBER_OF_SYMBOLS("numsym", "To find the word"),
     HELP("Help"),
     EXIT("Exit");
 

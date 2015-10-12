@@ -1,7 +1,7 @@
-package TextAnalyzer.service;
+package TextAnalyzer.Application.service;
 
-import TextAnalyzer.utility.CommandList;
-import TextAnalyzer.utility.Text;
+import TextAnalyzer.Application.utility.CommandList;
+import TextAnalyzer.Application.utility.Text;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -24,6 +24,13 @@ public class ConsoleCommands {
         scanner = new Scanner(System.in);
         userInputText = new Text();
         scanningProcessChoosen();
+    }
+
+    public ConsoleCommands(String filePath) {
+        userInputText = new Text();
+        scanner = new Scanner(System.in);
+
+        fileChose(filePath);
     }
 
     private void scanningProcessChoosen() {
@@ -67,6 +74,7 @@ public class ConsoleCommands {
             System.out.print(userInputText);
             print("Successful scan");
             print("Enter the command");
+
             process(scanner.nextLine());
         } catch (FileNotFoundException e) {
             print("Non-correct file path");
@@ -97,6 +105,9 @@ public class ConsoleCommands {
                     String find = scanner.nextLine();
                     TextAnalyzerUtils.findWord(userInputText.getInputText(), find);
                     break;
+                case NUMBER_OF_SYMBOLS:
+                    TextAnalyzerUtils.numberOfSymbols(userInputText.getInputText());
+                    break;
                 case HELP:
                     help();
                     break;
@@ -104,11 +115,11 @@ public class ConsoleCommands {
                     print("Bye");
                     System.exit(0);
                     break;
-                default:
-                    print("Unsupported command! You have to enter digit such as those");
-                    for (CommandList commandList : CommandList.values()) {
-                        System.out.println(commandList.toString());
-                    }
+            }
+        } else {
+            print("Unsupported command! You have to enter digit such as those");
+            for (CommandList commandList : CommandList.values()) {
+                System.out.println(commandList.toString());
             }
         }
         print("Enter the command");

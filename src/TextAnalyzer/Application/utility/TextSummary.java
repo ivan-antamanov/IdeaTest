@@ -1,4 +1,4 @@
-package TextAnalyzer.utility;
+package TextAnalyzer.Application.utility;
 
 /**
  * Created by iantaman on 06.10.2015.
