@@ -44,12 +44,12 @@ public class TextAnalyzerUtils {
 
     public static void numbersOfWords(String string) {
         int i = 0;
-        pattern = Pattern.compile("[a-zA-Z0-9]*(?=[,\\s\\.()\";:!?/\\-\\|])");
+        pattern = Pattern.compile("[a-zA-Z0-9]+(?=[,\\s\\.()\";:!?\\/\\-]*)");
         matcher = pattern.matcher(string);
         while (matcher.find()) {
             i++;
         }
-        System.out.print(i);
+        System.out.println("There are: "+ i + " words");
     }
 
     public static void numberOfSentence(String string) {
@@ -72,7 +72,7 @@ public class TextAnalyzerUtils {
         while (matcher.find()) {
             i++;
         }
-        System.out.println(i);
+        System.out.println("There are: " + i + " matches");
     }
 
 }

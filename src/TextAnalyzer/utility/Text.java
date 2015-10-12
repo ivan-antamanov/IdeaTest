@@ -5,7 +5,7 @@ package TextAnalyzer.utility;
  */
 public class Text {
 
-    String inputText;
+    private String inputText;
 
     public Text() {
     }
@@ -16,5 +16,10 @@ public class Text {
 
     public void setInputText(String inputText) {
         this.inputText = inputText;
+    }
+
+    @Override
+    public String toString() {
+        return inputText;
     }
 }
