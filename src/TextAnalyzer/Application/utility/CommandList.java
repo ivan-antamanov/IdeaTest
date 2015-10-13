@@ -1,5 +1,6 @@
 package TextAnalyzer.Application.utility;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -22,10 +23,11 @@ public enum CommandList {
     CommandList(String shortCommand, String command) {
         this.shortCommand = shortCommand;
         this.command = command;
+
     }
 
-    CommandList(String command) {
-        this.command = command;
+    CommandList(String shortCommand) {
+        this.shortCommand = shortCommand;
 
     }
 
@@ -38,10 +40,12 @@ public enum CommandList {
     }
 
     private static HashMap<String, CommandList> stringEnumMap = new HashMap<String, CommandList>();
+//    private static ArrayList<String> shortEnumComList = new ArrayList<String>(CommandList.values().length);
 
     static {
         for (CommandList e : CommandList.values()) {
             if (e.getShortCommand() != null) {
+//                shortEnumComList.add()
                 stringEnumMap.put(e.getShortCommand(), e);
             } else {
                 stringEnumMap.put(e.getCommand().toLowerCase(), e);
