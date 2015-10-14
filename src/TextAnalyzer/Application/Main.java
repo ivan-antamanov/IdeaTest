@@ -18,6 +18,7 @@ public class Main {
         ScannerForUser scannerForUser = new ScannerForUser(scanner);
         ScannerForUser scannerForTest = new ScannerForTest("C:\\Users\\iantaman\\Desktop\\new 1.txt","and");
         ConsoleCommands consoleCommands = new ConsoleCommands(scannerForTest);
+
         consoleCommands.scanningProcessChoosen();
 
 
