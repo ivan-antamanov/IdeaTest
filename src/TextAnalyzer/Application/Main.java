@@ -1,7 +1,7 @@
 package TextAnalyzer.Application;
 
-import Testing.Pattern.scanner_adapter.ScannerForCommands;
 import Testing.Pattern.scanner_adapter.ScannerForTest;
+import Testing.Pattern.scanner_adapter.ScannerForUser;
 import TextAnalyzer.Application.service.ConsoleCommands;
 import TextAnalyzer.Application.service.TextAnalyzerUtils;
 
@@ -15,8 +15,10 @@ public class Main {
 
         TextAnalyzerUtils text = new TextAnalyzerUtils();
         Scanner scanner = new Scanner(System.in);
-        ScannerForCommands scannerForCommands = new ScannerForCommands(null);
-        ConsoleCommands consoleCommands = new ConsoleCommands(scannerForCommands);
+        ScannerForUser scannerForUser = new ScannerForUser(scanner);
+        ScannerForUser scannerForTest = new ScannerForTest("C:\\Users\\iantaman\\Desktop\\new 1.txt","and");
+        ConsoleCommands consoleCommands = new ConsoleCommands(scannerForTest);
+        consoleCommands.scanningProcessChoosen();
 
 
     }

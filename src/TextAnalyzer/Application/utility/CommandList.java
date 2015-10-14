@@ -1,6 +1,5 @@
 package TextAnalyzer.Application.utility;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -14,8 +13,8 @@ public enum CommandList {
     VOWELS_AND_CONSONANTS("nvc", "Numbers of vowels and consonants"),
     TO_FIND_THE_WORD("ftw", "To find the word"),
     NUMBER_OF_SYMBOLS("numsym", "To find the word"),
-    HELP("Help"),
-    EXIT("Exit");
+    HELP("help", "How use this application"),
+    EXIT("exit", "Exit from applications");
 
     private String command;
     private String shortCommand;
@@ -23,11 +22,6 @@ public enum CommandList {
     CommandList(String shortCommand, String command) {
         this.shortCommand = shortCommand;
         this.command = command;
-
-    }
-
-    CommandList(String shortCommand) {
-        this.shortCommand = shortCommand;
 
     }
 
@@ -40,12 +34,10 @@ public enum CommandList {
     }
 
     private static HashMap<String, CommandList> stringEnumMap = new HashMap<String, CommandList>();
-//    private static ArrayList<String> shortEnumComList = new ArrayList<String>(CommandList.values().length);
 
     static {
         for (CommandList e : CommandList.values()) {
             if (e.getShortCommand() != null) {
-//                shortEnumComList.add()
                 stringEnumMap.put(e.getShortCommand(), e);
             } else {
                 stringEnumMap.put(e.getCommand().toLowerCase(), e);
@@ -57,14 +49,8 @@ public enum CommandList {
         return stringEnumMap;
     }
 
-
     @Override
     public String toString() {
-        if (shortCommand != null) {
-            return shortCommand + "(command)" + "=" + command;
-        } else {
-            return command.toLowerCase() + "(command)" + "=" + command;
-
-        }
+        return shortCommand + "(command)" + "=" + command; //Can make through StringBuilder
     }
 }

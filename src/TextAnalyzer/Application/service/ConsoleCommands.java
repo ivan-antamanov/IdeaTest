@@ -1,6 +1,6 @@
 package TextAnalyzer.Application.service;
 
-import Testing.Pattern.scanner_adapter.ScannerMethods;
+import Testing.Pattern.scanner_adapter.ScannerForUser;
 import TextAnalyzer.Application.utility.CommandList;
 import TextAnalyzer.Application.utility.Text;
 
@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Scanner;
 
 /**
  * Created by iantaman on 26.09.2015.2
@@ -18,28 +17,28 @@ import java.util.Scanner;
 public class ConsoleCommands {
 
     private Text userInputText;
-    private ScannerMethods scannerMethods;
+    private ScannerForUser scannerInputText;
 
 
-    public ConsoleCommands(ScannerMethods scannerMethods) {
-        this.scannerMethods = scannerMethods;
+    public ConsoleCommands(ScannerForUser scannerInputText) {
+        this.scannerInputText = scannerInputText;
         userInputText = new Text();
-        scanningProcessChoosen();
+
     }
 
-    private void scanningProcessChoosen() {
+    public void scanningProcessChoosen() {
         print("Enter the command for analyze text or text-file. (help)");
         try {
-            switch (CommandList.getStringEnumMap().get(scannerMethods.nextLine())) {
+            switch (CommandList.getStringEnumMap().get(scannerInputText.nextLine())) {
                 case TEXT_MODEL:
                     print("Enter the text");
                     readUserInputText();
                     print("Enter the command");
-                    process(scannerMethods.nextLine());
+                    process(scannerInputText.nextLine());
                     break;
                 case FILE_MODEL:
                     print("Enter the file path");
-                    fileChose(scannerMethods.nextLine());
+                    fileChose(scannerInputText.nextLine());
                     break;
                 case HELP:
                     help();
@@ -49,6 +48,7 @@ public class ConsoleCommands {
             }
         } catch (Exception e) {
             System.out.println("Error!");
+            e.printStackTrace();
             scanningProcessChoosen();
         }
         scanningProcessChoosen();
@@ -69,13 +69,13 @@ public class ConsoleCommands {
             print("Successful scan");
             print("Enter the command");
 
-            process(scannerMethods.nextLine());
+            process(scannerInputText.nextLine());
         } catch (FileNotFoundException e) {
             print("Non-correct file path");
-            fileChose(scannerMethods.nextLine());
+            fileChose(scannerInputText.nextLine());
         } catch (IOException e) {
             print("Can't scanning file! Please check file settings");
-            fileChose(scannerMethods.nextLine());
+            fileChose(scannerInputText.nextLine());
         } catch (Exception e) {
             print("Something going wrong. Please try again");
         }
@@ -96,7 +96,7 @@ public class ConsoleCommands {
                     break;
                 case TO_FIND_THE_WORD:
                     print("Write the word which u wanna find");
-                    String searchWord = scannerMethods.nextLine();
+                    String searchWord = scannerInputText.nextLine();
                     TextAnalyzerUtils.findWord(userInputText.getInputText(), searchWord);
                     break;
                 case NUMBER_OF_SYMBOLS:
@@ -117,12 +117,12 @@ public class ConsoleCommands {
             }
         }
         print("Enter the command");
-        process(scannerMethods.nextLine());
+        process(scannerInputText.nextLine());
 
     }
 
     private void readUserInputText() {
-        userInputText.setInputText(scannerMethods.nextLine());
+        userInputText.setInputText(scannerInputText.nextLine());
     }
 
     public void help() {
