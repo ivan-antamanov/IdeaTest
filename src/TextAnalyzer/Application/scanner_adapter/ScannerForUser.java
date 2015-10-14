@@ -1,6 +1,4 @@
-package Testing.Pattern.scanner_adapter;
-
-import TextAnalyzer.Application.utility.CommandList;
+package TextAnalyzer.Application.scanner_adapter;
 
 import java.util.*;
 

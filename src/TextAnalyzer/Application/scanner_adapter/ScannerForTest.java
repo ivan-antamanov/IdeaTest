@@ -1,4 +1,4 @@
-package Testing.Pattern.scanner_adapter;
+package TextAnalyzer.Application.scanner_adapter;
 
 import TextAnalyzer.Application.utility.CommandList;
 
@@ -32,8 +32,10 @@ public class ScannerForTest extends ScannerForUser {
 
     @Override
     public String nextLine() {
+        String str = null;
         while (iterator.hasNext()) {
-            return String.valueOf(iterator.next());
+            str = String.valueOf(iterator.next());
+            return String.valueOf(str);
         }
 
         return "\nSuccessful test";

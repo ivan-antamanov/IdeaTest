@@ -1,7 +1,7 @@
 package TextAnalyzer.Application;
 
-import Testing.Pattern.scanner_adapter.ScannerForTest;
-import Testing.Pattern.scanner_adapter.ScannerForUser;
+import TextAnalyzer.Application.scanner_adapter.ScannerForTest;
+import TextAnalyzer.Application.scanner_adapter.ScannerForUser;
 import TextAnalyzer.Application.service.ConsoleCommands;
 import TextAnalyzer.Application.service.TextAnalyzerUtils;
 
