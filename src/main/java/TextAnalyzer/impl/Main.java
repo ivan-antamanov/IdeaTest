@@ -1,9 +1,7 @@
 package main.java.TextAnalyzer.impl;
 
-import main.java.TextAnalyzer.test.ScannerForTest;
 import main.java.TextAnalyzer.impl.scanner_adapter.ScannerForUser;
 import main.java.TextAnalyzer.impl.service_tool.ConsoleCommands;
-import main.java.TextAnalyzer.impl.service_tool.TextAnalyzerUtils;
 
 import java.util.Scanner;
 
@@ -19,7 +17,7 @@ public class Main {
         ScannerForUser scannerForTest = new ScannerForUser(scanner);
         ConsoleCommands consoleCommands = new ConsoleCommands(scannerForTest);
 
-        consoleCommands.scanningProcessChoosen();
+       while(!consoleCommands.scanningProcess());
 
 
     }

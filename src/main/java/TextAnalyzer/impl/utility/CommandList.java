@@ -1,5 +1,7 @@
 package main.java.TextAnalyzer.impl.utility;
 
+import main.java.TextAnalyzer.impl.service_tool.TextAnalyzerUtils;
+
 import java.util.HashMap;
 
 /**
@@ -8,7 +10,11 @@ import java.util.HashMap;
 public enum CommandList {
     TEXT_MODEL("ett", "Enter the text and analyze it"),
     FILE_MODEL("efp", "Enter text-file path like \"C:\\\\Users\\\\iantaman\\\\Desktop\\\\new 1.txt\" and analyze it"),
-    NUMBER_OF_WORDS("now", "Numbers of words"),
+    NUMBER_OF_WORDS("now", "Numbers of words"){
+        public void some(String inputText){
+            TextAnalyzerUtils.consAndWow(inputText);
+        }
+    },
     NUMBER_OF_SENTENCE("nos", "Numbers of sentence"),
     VOWELS_AND_CONSONANTS("nvc", "Numbers of vowels and consonants"),
     TO_FIND_THE_WORD("ftw", "To find the word"),

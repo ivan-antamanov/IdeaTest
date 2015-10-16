@@ -6,6 +6,7 @@ package main.java.TextAnalyzer.impl.utility;
 public class Text {
 
     private String inputText;
+    private String filePath;
 
     public Text() {
     }
@@ -18,8 +19,11 @@ public class Text {
         this.inputText = inputText;
     }
 
-    @Override
-    public String toString() {
-        return inputText;
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 }

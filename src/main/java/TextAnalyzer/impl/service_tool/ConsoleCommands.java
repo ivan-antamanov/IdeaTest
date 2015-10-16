@@ -11,47 +11,88 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static main.java.TextAnalyzer.impl.utility.CommandList.*;
+
 /**
  * Created by iantaman on 26.09.2015.2
  */
 public class ConsoleCommands {
 
-    private Text userInputText;
+    private Text userInputTextAndPath;
     private ScannerForUser scannerInputText;
-
 
     public ConsoleCommands(ScannerForUser scannerInputText) {
         this.scannerInputText = scannerInputText;
-        userInputText = new Text();
-
+        userInputTextAndPath = new Text();
     }
 
-    public void scanningProcessChoosen() {
-        print("Enter the command for analyze text or text-file. (help)");
+    public boolean scanningProcess() {
+        System.out.println("Enter the command please");
+        String command = scannerInputText.nextLine();
         try {
-            switch (CommandList.getStringEnumMap().get(scannerInputText.nextLine())) {
-                case TEXT_MODEL:
-                    print("Enter the text");
-                    readUserInputText();
-                    print("Enter the command");
-                    process(scannerInputText.nextLine());
-                    break;
-                case FILE_MODEL:
-                    print("Enter the file path");
-                    fileChose(scannerInputText.nextLine());
-                    break;
-                case HELP:
-                    help();
-                    break;
-                default:
-                    print("Unsupported command! You have to enter digit such as those" + CommandList.getStringEnumMap());
+            if (getStringEnumMap().containsKey(command)) {
+                switch (getStringEnumMap().get(command)) {
+
+                    case TEXT_MODEL:
+                        print("Enter the text, please");
+                        readUserInputText();
+                        if (userInputTextAndPath.getInputText().equals("exit")) {
+                            System.out.println("Bay!");
+                            return true;
+                        }
+                        break;
+
+                    case FILE_MODEL:
+                        print("Enter the file path");
+                        readUserFilePath();
+                        if (userInputTextAndPath.getFilePath().equals("exit")) {
+                            System.out.println("Bay!");
+                            return true;
+                        }
+                        break;
+
+                    case NUMBER_OF_WORDS:
+                        TextAnalyzerUtils.numbersOfWords(userInputTextAndPath.getInputText());
+                        break;
+
+                    case NUMBER_OF_SENTENCE:
+                        TextAnalyzerUtils.numberOfSentence(userInputTextAndPath.getInputText());
+                        break;
+
+                    case VOWELS_AND_CONSONANTS:
+                        TextAnalyzerUtils.consAndWow(userInputTextAndPath.getInputText());
+                        break;
+
+                    case TO_FIND_THE_WORD:
+                        print("Write the word which u wanna find");
+                        String searchWord = scannerInputText.nextLine();
+                        TextAnalyzerUtils.findWord(userInputTextAndPath.getInputText(), searchWord);
+                        break;
+
+                    case NUMBER_OF_SYMBOLS:
+                        TextAnalyzerUtils.numberOfSymbols(userInputTextAndPath.getInputText());
+                        break;
+
+                    case HELP:
+                        help();
+                        break;
+
+                    case EXIT:
+                        System.out.println("Bay!");
+                        return true;
+
+                    default:
+                        System.out.println("This command has not included into processing command list yet");
+                }
+
+            } else {
+                System.out.println("Wrong command");
             }
-        } catch (Exception e) {
-            System.out.println("Error!");
-            e.printStackTrace();
-            scanningProcessChoosen();
+        } catch (NullPointerException e) {
+            System.out.println("At first, u should enter the text");
         }
-        scanningProcessChoosen();
+
+        return scanningProcess();
     }
 
     private void fileChose(String filePath) {
@@ -64,66 +105,32 @@ public class ConsoleCommands {
                 stringBuilder.append("\n");
             }
 
-            userInputText.setInputText(stringBuilder.toString());
-            System.out.print(userInputText);
+            userInputTextAndPath.setInputText(stringBuilder.toString());
+            System.out.print(userInputTextAndPath);
             print("Successful scan");
             print("Enter the command");
 
-            process(scannerInputText.nextLine());
+//            scanningProcess();
         } catch (FileNotFoundException e) {
             print("Non-correct file path");
-            fileChose(scannerInputText.nextLine());
+            readUserFilePath();
         } catch (IOException e) {
-            print("Can't scanning file! Please check file settings");
-            System.exit(0);
-            fileChose(scannerInputText.nextLine());
+            print("Can't scanning file! Please check file settings and entering the correct file directory:");
+            readUserFilePath();
         } catch (Exception e) {
             print("Something going wrong. Please try again");
         }
+//        return scanningProcess();
     }
 
-    void process(String command) {
-
-        if (CommandList.getStringEnumMap().containsKey(command)) {
-            switch (CommandList.getStringEnumMap().get(command)) {
-                case NUMBER_OF_WORDS:
-                    TextAnalyzerUtils.numbersOfWords(userInputText.getInputText());
-                    break;
-                case NUMBER_OF_SENTENCE:
-                    TextAnalyzerUtils.numberOfSentence(userInputText.getInputText());
-                    break;
-                case VOWELS_AND_CONSONANTS:
-                    TextAnalyzerUtils.consAndWow(userInputText.getInputText());
-                    break;
-                case TO_FIND_THE_WORD:
-                    print("Write the word which u wanna find");
-                    String searchWord = scannerInputText.nextLine();
-                    TextAnalyzerUtils.findWord(userInputText.getInputText(), searchWord);
-                    break;
-                case NUMBER_OF_SYMBOLS:
-                    TextAnalyzerUtils.numberOfSymbols(userInputText.getInputText());
-                    break;
-                case HELP:
-                    help();
-                    break;
-                case EXIT:
-                    print("Bye");
-                    System.exit(0);
-                    break;
-            }
-        } else {
-            print("Unsupported command! You have to enter digit such as those");
-            for (CommandList commandList : CommandList.values()) {
-                System.out.println(commandList.toString());
-            }
-        }
-        print("Enter the command");
-        process(scannerInputText.nextLine());
-
+    private void readUserFilePath() {
+        userInputTextAndPath.setFilePath(scannerInputText.nextLine());
+        fileChose(userInputTextAndPath.getFilePath());
     }
+
 
     private void readUserInputText() {
-        userInputText.setInputText(scannerInputText.nextLine());
+        userInputTextAndPath.setInputText(scannerInputText.nextLine());
     }
 
     public void help() {
@@ -139,5 +146,6 @@ public class ConsoleCommands {
     public void print(String string) {
         System.out.println(string);
     }
+
 
 }

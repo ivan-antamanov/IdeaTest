@@ -3,8 +3,12 @@ package main.java.TextAnalyzer.test;
 import main.java.TextAnalyzer.impl.scanner_adapter.ScannerForUser;
 import main.java.TextAnalyzer.impl.utility.CommandList;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
 
 /**
  * Created by iantaman on 13.10.2015.
@@ -33,14 +37,18 @@ public class ScannerForTest extends ScannerForUser {
 
     @Override
     public String nextLine() {
-        String str = null;
         while (iterator.hasNext()) {
-            str = String.valueOf(iterator.next());
-            return String.valueOf(str);
-        }
+            String currentCommand = String.valueOf(iterator.next());
 
-        return "\nSuccessful test";
-    }
+            try (InputStream is = new ByteArrayInputStream(currentCommand.getBytes()); Scanner scanner = new Scanner(is)) {
+                while (scanner.hasNextLine()) {
+                    return scanner.nextLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    return "Error";}
 
     @Override
     public boolean hasNextLine() {
